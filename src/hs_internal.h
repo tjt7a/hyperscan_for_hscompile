@@ -52,6 +52,12 @@ hs_error_t hs_compile_multi_int(const char *const *expressions,
                                 hs_database_t **db,
                                 hs_compile_error_t **comp_error, const Grey &g);
 
+hs_error_t hs_compile_graph_int(const char * graphFN, unsigned mode,
+                                const hs_platform_info_t *platform,
+                                hs_database_t **db,
+                                hs_compile_error_t **comp_error, const Grey &g);
+
+
 } // namespace ue2
 
 extern "C"

@@ -408,6 +408,16 @@ hs_error_t hs_compile_multi(const char *const *expressions,
                             hs_database_t **db, hs_compile_error_t **error);
 
 /**
+* Compile automata from NFA graph description file.
+*/
+hs_error_t hs_compile_graph(const char *graphFN, 
+                            unsigned int mode, 
+                            const hs_platform_info_t *platform,
+                            hs_database_t **db, 
+                            hs_compile_error_t **error);
+
+
+/**
  * The multiple regular expression compiler with extended parameter support.
  *
  * This function call compiles a group of expressions into a database in the
