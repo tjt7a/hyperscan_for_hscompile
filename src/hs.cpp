@@ -68,11 +68,11 @@ using namespace ue2;
 static
 bool validModeFlags(unsigned int mode) {
     static const unsigned allModeFlags = HS_MODE_BLOCK
-        | HS_MODE_STREAM
-        | HS_MODE_VECTORED
-        | HS_MODE_SOM_HORIZON_LARGE
-        | HS_MODE_SOM_HORIZON_MEDIUM
-        | HS_MODE_SOM_HORIZON_SMALL;
+                                       | HS_MODE_STREAM
+                                       | HS_MODE_VECTORED
+                                       | HS_MODE_SOM_HORIZON_LARGE
+                                       | HS_MODE_SOM_HORIZON_MEDIUM
+                                       | HS_MODE_SOM_HORIZON_SMALL;
 
     return !(mode & ~allModeFlags);
 }
@@ -83,7 +83,7 @@ bool checkMode(unsigned int mode, hs_compile_error **comp_error) {
     // First, check that only bits with meaning are on.
     if (!validModeFlags(mode)) {
         *comp_error = generateCompileError("Invalid parameter: "
-                                           "unrecognised mode flags.", -1);
+                "unrecognised mode flags.", -1);
         return false;
     }
 
@@ -92,10 +92,10 @@ bool checkMode(unsigned int mode, hs_compile_error **comp_error) {
         = mode & (HS_MODE_STREAM | HS_MODE_BLOCK | HS_MODE_VECTORED);
     if (popcount32(checkmode) != 1) {
         *comp_error = generateCompileError(
-                                           "Invalid parameter: mode must have one "
-                                           "(and only one) of HS_MODE_BLOCK, HS_MODE_STREAM or "
-                                           "HS_MODE_VECTORED set.",
-                                           -1);
+            "Invalid parameter: mode must have one "
+            "(and only one) of HS_MODE_BLOCK, HS_MODE_STREAM or "
+            "HS_MODE_VECTORED set.",
+            -1);
         return false;
     }
 
@@ -107,14 +107,14 @@ bool checkMode(unsigned int mode, hs_compile_error **comp_error) {
     if (somMode) {
         if (!(mode & HS_MODE_STREAM)) {
             *comp_error = generateCompileError("Invalid parameter: the "
-                                               "HS_MODE_SOM_HORIZON_ mode flags may only be set in "
-                                               "streaming mode.", -1);
+                    "HS_MODE_SOM_HORIZON_ mode flags may only be set in "
+                    "streaming mode.", -1);
             return false;
 
         }
         if ((somMode & (somMode - 1)) != 0) {
             *comp_error = generateCompileError("Invalid parameter: only one "
-                                               "HS_MODE_SOM_HORIZON_ mode flag can be set.", -1);
+                    "HS_MODE_SOM_HORIZON_ mode flag can be set.", -1);
             return false;
         }
     }
@@ -135,7 +135,7 @@ bool checkPlatform(const hs_platform_info *p, hs_compile_error **comp_error) {
         *comp_error = generateCompileError("Invalid cpu features specified in "
                                            "the platform information.", -1);
         return false;
-    }
+   }
 
     if (p->tune > HS_TUNE_LAST) {
         *comp_error = generateCompileError("Invalid tuning value specified in "
@@ -229,7 +229,7 @@ hs_compile_multi_int(const char *const *expressions, const unsigned *flags,
     unsigned somPrecision = getSomPrecision(mode);
 
     target_t target_info = platform ? target_t(*platform)
-        : get_current_target();
+                                    : get_current_target();
 
     CompileContext cc(isStreaming, isVectored, target_info, g);
     NG ng(cc, elements, somPrecision);
