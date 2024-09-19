@@ -100,6 +100,7 @@
 #include <string>
 #include <vector>
 #include <utility>
+#include <functional>
 
 #include <boost/range/adaptor/map.hpp>
 
@@ -4371,7 +4372,7 @@ void makeCheckLiteralInstruction(const RoseBuildImpl &build,
 static
 bool hasDelayedLiteral(RoseBuildImpl &build,
                        const vector<RoseEdge> &lit_edges) {
-    auto is_delayed = bind(&RoseBuildImpl::isDelayed, &build, _1);
+    auto is_delayed = bind(&RoseBuildImpl::isDelayed, &build, placeholders::_1);
     for (const auto &e : lit_edges) {
         auto v = target(e, build.g);
         const auto &lits = build.g[v].literals;
